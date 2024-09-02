@@ -32,10 +32,10 @@ export const Canvas = () => {
   return (
     <FiberCanvas
     shadows
-    camera={{ position: [0, 10, 45], fov: 45, near: 1, far: 20000 }} >
+    camera={{ position: [0, 9, 45  * 2], fov: 45, near: 1, far: 20000 }} >
 
     {/* SKY BG */}
-    <Environment files="./backgrounds/bg1.hdr" background blur={0.5} />
+    <Environment files="./backgrounds/bg2.hdr" background blur={0.5} />
     
     {/* Define the fog here on the Canvas */}
     <fog attach="fog" args={['#a3a2a2', -100, 1200]} />
@@ -64,7 +64,8 @@ export const Canvas = () => {
     </group>
 
 
-    <WaveAnimation />
+    {/* <WaveAnimation /> */}
+
     {/* <OrbitControls /> */}
     {/* <axesHelper args={[15]} />
     <gridHelper /> */}
@@ -79,7 +80,7 @@ export const Canvas = () => {
 
     <MarbleBust />
 
-    <ScrollControls pages={4} infinite>
+    <ScrollControls pages={4}>
         <Carousel />
     </ScrollControls>
 

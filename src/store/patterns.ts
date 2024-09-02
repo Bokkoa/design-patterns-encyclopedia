@@ -1,3 +1,5 @@
+import { proxy } from "valtio";
+
 interface IPattern {
   name: string;
   family: string;
@@ -30,3 +32,5 @@ export const Patterns: IPattern[] = [
   { name: "Template Method", family: "Behavioral", available: false },
   { name: "Visitor", family: "Behavioral", available: false }
 ];
+
+export const state = proxy({ searchCriteria: '', patterns: {} })

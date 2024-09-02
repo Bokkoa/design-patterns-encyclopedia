@@ -5,3 +5,24 @@ body,
   margin: 0;
 }
 
+.custom-scroll::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 3px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 2px;  
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  .custom-scroll {
+    scrollbar-color: var(--sb-thumb-color)
+                     var(--sb-track-color);
+
+  }
+}
