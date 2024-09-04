@@ -1,44 +1,54 @@
 import { useScroll } from "@react-three/drei"
-import { useFrame, useThree } from "@react-three/fiber"
+import { useFrame } from "@react-three/fiber"
 import { useEffect, useRef, useState } from "react"
 import { Card } from "./Card"
 import { Patterns, state } from "../store/patterns"
 import { useSnapshot } from "valtio"
 
+// Position where start the first pattern
+const INITIAL_RADIUS_POINT_ANGLE = 1.40;
+const TOLERANCE = 0.001;
+
 export function Rig(props: any) {
-  
+
   const snap = useSnapshot(state)
 
   const ref = useRef<any>()
   const scroll = useScroll()
-  const [rotation, setRotation] = useState(0); 
+  const targetOffsetRef = useRef(scroll.offset);
+  const [dataFound, setDataFound] = useState(false)
 
-    const rotateToCard = (cardText: string) => {
-      const cardIndex = Patterns.findIndex(pattern => pattern.name.toUpperCase() === cardText.toUpperCase());
-      console.log(cardIndex)
-      if (cardIndex !== -1) {
-        const count = Patterns.length;
-        const targetAngle = (cardIndex / count) * Math.PI * 2;
-        setRotation(-targetAngle);
-        const targetOffset = cardIndex / count; // Calculate the target scroll offset as a fraction
-        scroll.offset = targetOffset;
-      }
-    };
-  
-    useEffect(() => {
-      rotateToCard(snap.searchCriteria); // Replace "Singleton" with the desired card text
-    }, [snap.searchCriteria]);
+  const rotateToCard = (cardText: string) => {
+
+    if (cardText) {
+      setDataFound(true);
+      const count = Patterns.length;
+      const targetOffset = snap.searchIndex / count; 
+      targetOffsetRef.current = targetOffset
+    } else {
+      setDataFound(false)
+    }
+
+  };
+
+  useEffect(() => {
+    rotateToCard(snap.searchCriteria);
+  }, [snap.searchCriteria]);
 
   useFrame((state: any, delta) => {
-    ref.current.rotation.z = -scroll.offset * (Math.PI * 2) + rotation // Rotate contents
+
+    if(dataFound){
+      scroll.offset += (targetOffsetRef.current - scroll.offset)
+    }
+    ref.current.rotation.z = -scroll.offset * (Math.PI * 2);
     state.events.update() 
   })
 
-  return <group 
+  return <group
     position={[-43, 0, 20]}
     ref={ref}
-    {...props} 
-   
+    {...props}
+
   />
 }
 
@@ -49,13 +59,11 @@ export function Carousel() {
   const CARD_GAP = 5
   let cardWidth = 4;
   const radius = (cardWidth + CARD_GAP) / (2 * Math.sin(Math.PI / count));
-  if (count > 12) {
-    cardWidth = (Math.PI * radius * 2) / count - CARD_GAP
-  }
 
   return <Rig >
-    {Patterns.map(( pattern, i) => {
-      const angle = (i  / count) * Math.PI * 2;
+    {Patterns.map((pattern, i) => {
+      const angle = - (i / count) * Math.PI * 2 + INITIAL_RADIUS_POINT_ANGLE;
+
       return (
         <Card
           key={i}

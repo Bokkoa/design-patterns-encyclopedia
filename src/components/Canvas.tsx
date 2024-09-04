@@ -7,6 +7,7 @@ import { Ocean } from './Ocean'
 import { Text } from './Text'
 import { MarbleBust } from './MarbleBust'
 import { Carousel } from './Carousel'
+import { Patterns } from '../store/patterns'
 
 
 
@@ -32,7 +33,7 @@ export const Canvas = () => {
   return (
     <FiberCanvas
     shadows
-    camera={{ position: [0, 9, 45  * 2], fov: 45, near: 1, far: 20000 }} >
+    camera={{ position: [0, 9, 45], fov: 45, near: 1, far: 20000 }} >
 
     {/* SKY BG */}
     <Environment files="./backgrounds/bg2.hdr" background blur={0.5} />
@@ -80,7 +81,7 @@ export const Canvas = () => {
 
     <MarbleBust />
 
-    <ScrollControls pages={4}>
+    <ScrollControls pages={Patterns.length /  4}>
         <Carousel />
     </ScrollControls>
 
