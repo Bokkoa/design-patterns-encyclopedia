@@ -1,21 +1,22 @@
 import { useScroll } from "@react-three/drei"
 import { useFrame } from "@react-three/fiber"
-import { useEffect, useRef, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { Card } from "./Card"
 import { Patterns, state } from "../store/patterns"
 import { useSnapshot } from "valtio"
+import { ScrollContext, ScrollContextType } from '../utils/ScrollContext';
 
 // Position where start the first pattern
 const INITIAL_RADIUS_POINT_ANGLE = 1.40;
-const TOLERANCE = 0.001;
 
 export function Rig(props: any) {
-
+  const { setScrollRef } = useContext(ScrollContext) as ScrollContextType;
   const snap = useSnapshot(state)
 
   const ref = useRef<any>()
   const scroll = useScroll()
   const targetOffsetRef = useRef(scroll.offset);
+  const [scrollOffset, setScrollOffset] = useState(scroll.offset); // State to track scroll offset changes
   const [dataFound, setDataFound] = useState(false)
 
   const rotateToCard = (cardText: string) => {
@@ -32,6 +33,12 @@ export function Rig(props: any) {
   };
 
   useEffect(() => {
+    setScrollRef(scroll)
+    // console.log('@@@@@@@')
+  }, [targetOffsetRef.current])
+  
+
+  useEffect(() => {
     rotateToCard(snap.searchCriteria);
   }, [snap.searchCriteria]);
 
@@ -39,6 +46,11 @@ export function Rig(props: any) {
 
     if(dataFound){
       scroll.offset += (targetOffsetRef.current - scroll.offset)
+    } else if (targetOffsetRef.current !== scroll.offset) {
+      // Detect change in scroll.offset
+      setScrollOffset(scroll.offset);
+      // console.log("Scroll offset changed:", scroll.offset);
+      targetOffsetRef.current = scroll.offset;
     }
     ref.current.rotation.z = -scroll.offset * (Math.PI * 2);
     state.events.update() 

@@ -10,7 +10,7 @@ interface IPattern {
 export const Patterns: IPattern[] = [
   { name: "Abstract Factory", family: "Creational", available: false },
   { name: "Builder", family: "Creational", available: false },
-  { name: "Factory Method", family: "Creational", available: false },
+  { name: "Factory", family: "Creational", available: false },
   { name: "Prototype", family: "Creational", available: false },
   { name: "Singleton", family: "Creational", available: false },
   { name: "Adapter", family: "Structural", available: false },
@@ -33,4 +33,4 @@ export const Patterns: IPattern[] = [
   { name: "Visitor", family: "Behavioral", available: false }
 ];
 
-export const state = proxy({ searchIndex: 0, searchCriteria: '', patterns: {} })
+export const state = proxy({ searchIndex: 0, searchCriteria: '', patterns: {}, selectedPattern: null })

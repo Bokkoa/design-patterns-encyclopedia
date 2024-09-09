@@ -15,15 +15,14 @@ export const Canvas = () => {
 
   function WaveAnimation() {
     useFrame((state) => {
-      const elapsedTime = state.clock.getElapsedTime(); // Get the elapsed time from the clock
+      const elapsedTime = state.clock.getElapsedTime();
 
       // Sine wave parameters
-      const amplitude = 0.1; // Adjust the amplitude (height) of the wave
-      const frequency = 2; // Adjust the frequency (speed) of the wave
+      const amplitude = 0.3; // Adjust the amplitude (height) of the wave
+      const frequency = 1.5; // Adjust the frequency (speed) of the wave
 
-      // Update camera position using a sine function for wave motion
-      state.camera.position.y = 5 + Math.sin(elapsedTime * frequency) * amplitude; // Apply sine wave to y position
-      state.camera.position.x = Math.sin(elapsedTime * frequency) * amplitude; // Apply sine wave to x position for diagonal motion
+      state.camera.position.y = 5 + Math.sin(elapsedTime * frequency) * amplitude;
+      state.camera.position.x = Math.sin(elapsedTime * frequency) * amplitude;
       state.camera.lookAt(0, 0, 0)
     });
 
@@ -65,7 +64,7 @@ export const Canvas = () => {
     </group>
 
 
-    {/* <WaveAnimation /> */}
+    <WaveAnimation />
 
     {/* <OrbitControls /> */}
     {/* <axesHelper args={[15]} />
@@ -73,15 +72,15 @@ export const Canvas = () => {
 
     <EffectComposer>
       <Bloom
-        luminanceThreshold={.5}  // Adjusts the threshold for which parts will glow
-        luminanceSmoothing={.9}   // Smoothing factor for the glow effect
+        luminanceThreshold={1}  
+        luminanceSmoothing={.9}  
         intensity={.1}
       />
     </EffectComposer>
 
     <MarbleBust />
 
-    <ScrollControls pages={Patterns.length /  4}>
+    <ScrollControls pages={2}>
         <Carousel />
     </ScrollControls>
 

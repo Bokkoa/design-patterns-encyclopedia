@@ -1,13 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Patterns, state } from '../store/patterns';
 import '../styles/overlay.css';
 import { AnimatePresence, motion } from 'framer-motion';
+import { ScrollContext, ScrollContextType } from '../utils/ScrollContext';
 
 export const Overlay = () => {
-
+  const { scrollRef } = useContext(ScrollContext) as ScrollContextType;
   const [search, setSearch] = useState('')
   const [active, setActive] = useState(false)
   const [animationCount, setAnimationCount] = useState(0)
+
+
+  useEffect(() => {
+    console.log('@@@@@@@@')
+
+  }, [scrollRef?.offset]);
 
   useEffect(() => {
     const cardIndex = Patterns.findIndex(pattern => pattern.name.toUpperCase() === search.toUpperCase());
