@@ -33,4 +33,16 @@ export const Patterns: IPattern[] = [
   { name: "Visitor", family: "Behavioral", available: false }
 ];
 
-export const state = proxy({ searchIndex: 0, searchCriteria: '', patterns: {}, selectedPattern: null })
+interface IState {
+  searchIndex: number
+  searchCriteria: string
+  patterns: {}
+  selectedPattern: number | null
+}
+
+export const state = proxy<IState>({ 
+  searchIndex: 0, 
+  searchCriteria: '', 
+  patterns: {}, 
+  selectedPattern: null 
+});

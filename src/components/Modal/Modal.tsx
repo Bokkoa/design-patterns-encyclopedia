@@ -2,25 +2,33 @@ import { ReactNode } from "react"
 
 import { Code } from "./ModalCode";
 import { Header } from "./ModalHeader";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface IModalProps {
   children: ReactNode
-  visible: boolean
   onClose: () => void
 }
 
 const Modal = ({ children, onClose }: IModalProps) => {
+
   return (
-    <div className={`
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, transition: { duration: .8 } }}
+        exit={{ opacity: 0, transition: { duration: .8 } }}
+      >
+        <div className={`
       glass-dark 
       overflow-y-auto 
       fixed 
       z-50 
       w-full md:inset-0  
-      max-h-full`
-    }>
-      <div
-        className={`
+      max-h-full
+      `
+        }>
+          <div
+            className={`
         m-auto
         p-4
         mt-24
@@ -30,12 +38,13 @@ const Modal = ({ children, onClose }: IModalProps) => {
         glass-dark
         text-white
         `}
-      >
-        <button onClick={onClose} >Back</button>
-        {children}
-      </div>
-    </div>
-
+          >
+            <button onClick={onClose}>Back</button>
+            {children}
+          </div>
+        </div>
+      </motion.div>
+    </AnimatePresence>
   )
 }
 
