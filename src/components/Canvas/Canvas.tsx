@@ -1,4 +1,4 @@
-import { Environment,  OrbitControls, ScrollControls, Shadow, useScroll } from '@react-three/drei'
+import { Environment, OrbitControls, ScrollControls, Shadow, useScroll } from '@react-three/drei'
 import { Canvas as FiberCanvas, useFrame } from '@react-three/fiber'
 import { Suspense, useMemo, useRef } from 'react'
 import { Bloom, EffectComposer, SelectiveBloom } from '@react-three/postprocessing'
@@ -8,6 +8,7 @@ import { Rock } from './Models/Rock'
 import { CatStatue } from './Models/CatStatue'
 import { useControls } from 'leva'
 import { Title } from './Title'
+import { Loader } from './Loader'
 
 
 
@@ -34,7 +35,7 @@ export const Canvas = () => {
     <FiberCanvas
     shadows
     camera={{ position: [0, 9, 45], fov: 45, near: 1, far: 20000 }} >
-
+      <Suspense fallback={<Loader />}>
     {/* SKY BG */}
     <Environment files="./backgrounds/bg2.hdr" background blur={0.5} />
     
@@ -72,7 +73,7 @@ export const Canvas = () => {
     <ScrollControls pages={2}>
         <Carousel />
     </ScrollControls>
-
+    </Suspense>
   </FiberCanvas>
   )
 }

@@ -1,4 +1,3 @@
-import { proxy } from "valtio";
 
 interface IPattern {
   name: string;
@@ -32,17 +31,3 @@ export const Patterns: IPattern[] = [
   { name: "Template Method", family: "Behavioral", available: false },
   { name: "Visitor", family: "Behavioral", available: false }
 ];
-
-interface IState {
-  searchIndex: number
-  searchCriteria: string
-  patterns: {}
-  selectedPattern: number | null
-}
-
-export const state = proxy<IState>({ 
-  searchIndex: 0, 
-  searchCriteria: '', 
-  patterns: {}, 
-  selectedPattern: null 
-});

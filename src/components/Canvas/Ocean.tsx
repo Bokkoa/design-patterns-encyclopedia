@@ -18,11 +18,11 @@ export const Ocean = () => {
   }
   waterNormals.wrapS = waterNormals.wrapT = THREE.RepeatWrapping;
 
-  const geom = useMemo(() => new THREE.PlaneGeometry(10000, 10000), [])
+  const geom = useMemo(() => new THREE.PlaneGeometry(400, 950), [])
   const config = useMemo(
     () => ({
-      textureWidth: 1000,
-      textureHeight: 1000,
+      textureWidth: 100,
+      textureHeight: 100,
       waterNormals,
       sunDirection: new THREE.Vector3(),
       sunColor: 0xffffff,

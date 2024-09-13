@@ -6,8 +6,7 @@ import * as THREE from 'three'
 import { Text } from "./Text"
 import { useControls } from "leva"
 import { Flex } from "@react-three/flex"
-import { state } from "../../store/patterns"
-import { i } from "framer-motion/client"
+import { state } from "../../store/store"
 
 extend(geometry);
 
@@ -25,7 +24,6 @@ export function Card({ index, position, scale = [1, 1, 1], name, id, family, wid
   const pointerOut = () => setHovered(false)
 
   const click = (_: any) => {
-    console.log(id)
     state.selectedPattern = id
   }
 
@@ -33,12 +31,12 @@ export function Card({ index, position, scale = [1, 1, 1], name, id, family, wid
     return {
       backside: false,
       samples: { value: 16, min: 1, max: 32, step: 1 },
-      resolution: { value: 256, min: 64, max: 2048, step: 64 },
+      resolution: { value: 640, min: 64, max: 2048, step: 64 },
       transmission: { value: 0.86, min: 0, max: 1 },
       roughness: { value: 0.08, min: 0, max: 1, step: 0.01 },
-      clearcoat: { value: 0.1, min: 0, max: 1, step: 0.01 },
-      clearcoatRoughness: { value: 0.1, min: 0, max: 1, step: 0.01 },
-      thickness: { value: 14.9, min: 0, max: 200, step: 0.01 },
+      clearcoat: { value: 0, min: 0, max: 1, step: 0.01 },
+      clearcoatRoughness: { value: 0, min: 0, max: 1, step: 0.01 },
+      thickness: { value: 87, min: 0, max: 200, step: 0.01 },
       backsideThickness: { value: 200, min: 0, max: 200, step: 0.01 },
       ior: { value: 1.5, min: 1, max: 5, step: 0.01 },
       chromaticAberration: { value: 0.11, min: 0, max: 1 },

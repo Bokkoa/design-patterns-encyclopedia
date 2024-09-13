@@ -13,13 +13,12 @@ export const Selector: FC<SelectorProps> = ({ onChange }) => {
     backgroundColor: 'rgba(255, 255, 255, 0.25)',
     boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
     backdropFilter: 'blur(20px)',
-    fontSize: '20px'
   }
 
   return (
     <Select
     showSearch
-    style={{ width: '100%'}}
+    style={{ width: '100%' }}
     size="large"
     onChange={onChange}
     dropdownStyle={glassStyle}

@@ -1,8 +1,7 @@
 import { ReactNode } from "react"
-
 import { Code } from "./ModalCode";
 import { Header } from "./ModalHeader";
-import { AnimatePresence, motion } from "framer-motion";
+import { FadeIn } from "../Animations/FadeIn";
 
 interface IModalProps {
   children: ReactNode
@@ -12,13 +11,8 @@ interface IModalProps {
 const Modal = ({ children, onClose }: IModalProps) => {
 
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, transition: { duration: .8 } }}
-        exit={{ opacity: 0, transition: { duration: .8 } }}
-      >
-        <div className={`
+    <FadeIn>
+      <div className={`
       glass-dark 
       overflow-y-auto 
       fixed 
@@ -26,9 +20,9 @@ const Modal = ({ children, onClose }: IModalProps) => {
       w-full md:inset-0  
       max-h-full
       `
-        }>
-          <div
-            className={`
+      }>
+        <div
+          className={`
         m-auto
         p-4
         mt-24
@@ -38,13 +32,13 @@ const Modal = ({ children, onClose }: IModalProps) => {
         glass-dark
         text-white
         `}
-          >
-            <button onClick={onClose}>Back</button>
-            {children}
-          </div>
+        >
+          <button onClick={onClose}>Back</button>
+          {children}
         </div>
-      </motion.div>
-    </AnimatePresence>
+      </div>
+
+    </FadeIn>
   )
 }
 

@@ -1,17 +1,7 @@
 import { Flex } from "@react-three/flex"
 import { Text } from "./Text"
-import { useMemo } from "react"
-import { useControls } from "leva"
 
 export const Title = () => {
-
-  const textConfig = useMemo(() => {
-    return {
-      color: { value: '#000000' }
-    }
-  }, [])
-
-  const textCtrls = useControls('Text', textConfig);
 
   return (
     <group>
@@ -19,7 +9,7 @@ export const Title = () => {
         <Text position={[-5, 16, 1]} fontSize={5} lineHeight={1} letterSpacing={0}>
           {"The Patterns"}
           <meshPhysicalMaterial
-            color={textCtrls.color}
+            color={'#000000'}
           />
         </Text>
 

@@ -1,19 +1,13 @@
-import { useContext, useEffect, useState } from 'react';
-import { Patterns, state } from '../../store/patterns';
+import {  useEffect, useState } from 'react';
+import { Patterns } from '../../store/patterns';
 import './overlay.css';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Selector } from './Selector/Selector';
 import { useSnapshot } from 'valtio';
-import { Modal } from '../Modal/Modal';
+import { Modal } from './Modal/Modal';
+import { state } from '../../store/store';
+import { FadeIn } from './Animations/FadeIn';
 
-// FRAMER MOTION OBJECT THAT OVERRIDES UPANIMATION SECUENCE
-const containerSecuentialAnimation = {
-  show: {
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-}
 
 export const Overlay = () => {
 
@@ -45,7 +39,7 @@ export const Overlay = () => {
   }
 
   return (
-    <>
+    <FadeIn>
       <section className="fixed right-0 bottom-0 flex justify-end min-w-60 mr-20 mb-14 pointer-events-none">
         <div className="container">
           <h1 className='text-2xl font-bold p-4' style={{ color: '#ff63d2' }}>Search for a pattern</h1>
@@ -79,7 +73,7 @@ console.log(b + a);
 
           </Modal>
           }
-    </>
+    </FadeIn>
   );
 }
 
@@ -122,7 +116,3 @@ const InitialTransition = ({ setActive }: { setActive: (active: boolean) => void
     </div>
   );
 };
-
-
-
-

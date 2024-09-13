@@ -3,8 +3,9 @@ import { useFrame } from "@react-three/fiber"
 import { useContext, useEffect, useRef, useState } from "react"
 import { useSnapshot } from "valtio"
 import { ScrollContext, ScrollContextType } from "../../contexts/ScrollContext";
-import { Patterns, state } from "../../store/patterns";
+import { Patterns } from "../../store/patterns";
 import { Card } from "./Card";
+import { state } from "../../store/store";
 
 // Position where start the first pattern
 const INITIAL_RADIUS_POINT_ANGLE = 1.40;

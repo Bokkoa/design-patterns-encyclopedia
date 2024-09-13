@@ -1,7 +1,7 @@
 import 'highlight.js/styles/qtcreator-dark.min.css';
 
 import { FC, useEffect, useRef } from "react";
-import { CodeFormatter } from "../../utils/codeFormatter";
+import { CodeFormatter } from "../../../utils/codeFormatter";
 
 interface ICodeProps {
   children: string

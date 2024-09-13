@@ -6,6 +6,14 @@
   border-radius: 10px !important;
   border: 1px solid rgba(255, 255, 255, 0.18) !important;
 }
+.ant-select-selection-placeholder{
+  color: black !important;
+}
 .ant-select-item-option-selected{
   background: rgba(177, 62, 160, 0.35) !important;
+}
+.ant-select-item{
+  /* color: rgb(202, 82, 168) !important; */
+  color: black !important;
+  font-size: 20px !important;
 }
