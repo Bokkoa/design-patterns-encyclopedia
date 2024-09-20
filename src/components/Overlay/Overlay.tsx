@@ -7,6 +7,8 @@ import { useSnapshot } from 'valtio';
 import { Modal } from './Modal/Modal';
 import { state } from '../../store/store';
 import { FadeIn } from './Animations/FadeIn';
+import { useTranslation } from 'react-i18next';
+import { IContent, IText } from '../../store/abstractions/IContent';
 
 
 export const Overlay = () => {
@@ -14,9 +16,12 @@ export const Overlay = () => {
   const [search, setSearch] = useState('')
   const [active, setActive] = useState(false)
   const [animationCount, setAnimationCount] = useState(0)
-
+  const [patternContent, setPatternContent] = useState<IContent | null>(null);
   const snap = useSnapshot(state)
 
+  const { t } = useTranslation();
+
+  
   useEffect(() => {
 
     const cardIndex = Patterns.findIndex(pattern => pattern.name.toUpperCase() === search?.toUpperCase());
@@ -33,6 +38,14 @@ export const Overlay = () => {
     }
 
   }, [search])
+
+  useEffect(() => {
+    if(snap.selectedPattern !== null){
+      const content = Patterns[snap.selectedPattern]?.content
+      if(content) setPatternContent(content)
+    }
+  }, [snap.selectedPattern])
+  
 
   const onInputChange = (patternSelected: string) => {
     setSearch(patternSelected);
@@ -52,17 +65,31 @@ export const Overlay = () => {
               snap.selectedPattern != null &&
               snap.selectedPattern !== undefined &&
           <Modal
-            
             onClose={() => {
               state.selectedPattern = null
               setSearch('')
             }}>
-            <Modal.Header title={Patterns[snap.selectedPattern ?? 0].name} >
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam magnam quae ratione modi soluta iure repellat doloribus repudiandae necessitatibus obcaecati, illum, quis corrupti cumque tenetur sequi unde pariatur, odio officia?</p>
-              <p>!!</p>
-              {snap.selectedPattern}
-            </Modal.Header>
+            {patternContent?.sections.map(s => {
 
+              if(s.type === 'Text'){
+                s = s as IText
+                return(
+                  <Modal.Description>
+                    <p>
+                      {t(s.textIndex)}
+                    </p>
+                  </Modal.Description>
+                )
+              }
+
+              if(s.type === 'Code') {
+                return (
+                  <h1>Code</h1>
+                )
+              }
+            })
+
+            }
             <Modal.Code description='Cuerpo'>
               {`
 const a = 100;

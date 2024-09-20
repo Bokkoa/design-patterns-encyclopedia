@@ -1,13 +1,16 @@
+import { IContent } from "./abstractions/IContent";
+import { factoryPatternContent } from "./creationals/factory";
 
 interface IPattern {
   name: string;
   family: string;
-  available: boolean
+  available: boolean;
+  content?: IContent
 }
 
 
 export const Patterns: IPattern[] = [
-  { name: "Abstract Factory", family: "Creational", available: false },
+  { name: "Abstract Factory", family: "Creational", available: false, content: factoryPatternContent },
   { name: "Builder", family: "Creational", available: false },
   { name: "Factory", family: "Creational", available: false },
   { name: "Prototype", family: "Creational", available: false },

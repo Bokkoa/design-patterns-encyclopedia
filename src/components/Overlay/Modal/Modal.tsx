@@ -1,6 +1,6 @@
 import { ReactNode } from "react"
 import { Code } from "./ModalCode";
-import { Header } from "./ModalHeader";
+import { Description } from "./ModalDescription";
 import { FadeIn } from "../Animations/FadeIn";
 
 interface IModalProps {
@@ -44,6 +44,6 @@ const Modal = ({ children, onClose }: IModalProps) => {
 
 
 Modal.Code = Code
-Modal.Header = Header
+Modal.Description = Description
 
 export { Modal }
